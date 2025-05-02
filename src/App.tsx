@@ -1,5 +1,6 @@
 import Card from './components/Card'
 import React from 'react'
+import useFetch from './hooks/useFetch'
 
 type User = {
   name: string
@@ -46,6 +47,10 @@ function App() {
   // This can be used with array and object to make sure that the values are readonly
   //numbers[0] = 1
   
+  // Generic typing in react, this is a way to make sure that the data you are getting from the api is of the type you want
+  const data: string | null = useFetch<string>("something") // typically you want to pass a type in order to specify the return type of the data
+  const user1: User | null = useFetch<User>("something") // typically you want to pass a type in order to specify the return type of the data
+
 
   return (
     <>
