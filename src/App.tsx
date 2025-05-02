@@ -1,16 +1,28 @@
-import { useState } from 'react'
+import Card from './components/Card'
+import React from 'react'
 
 function App() {
-  const [count, setCount] = useState(0)
-  console.log('App component rendered')
+  const [count, setCount] = React.useState(0)
+
+  const users = [
+    { name: 'John', age: 25 },
+    { name: 'Jane', age: 30 },
+    { name: 'Bob', age: 35 },
+
+  ]
+
+  function alertMessage(message: string) {
+    alert(message)
+  }
+  
+
   return (
     <>
-      <div>
-        <p className="read-the-docs">
-          Click on the Vite and React logos to learn more
-        </p>
-      </div>
-
+      {
+        users.map((user, index) => (
+          <Card color="red" setCount={setCount} alertMessage={alertMessage} user={user} key={index}>{user.name}</Card>
+        ))
+      }
     </>
   )
 }
