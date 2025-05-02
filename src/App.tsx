@@ -1,11 +1,20 @@
 import Card from './components/Card'
 import React from 'react'
+import {createContext} from 'react'
+
 import useFetch from './hooks/useFetch'
 
 type User = {
   name: string
   age: number
 }
+
+type ContextType = {
+  user: string,
+  isLoading: boolean
+}
+
+export const MyContext = createContext<ContextType | null>(null)
 
 function App() {
   
@@ -52,8 +61,13 @@ function App() {
   const user1: User | null = useFetch<User>("something") // typically you want to pass a type in order to specify the return type of the data
 
 
+  const value:ContextType = {
+    user: "John",
+    isLoading: false
+  }
+
   return (
-    <>
+    <MyContext.Provider value ={value}>
       {
         users.map((user, index) => (
           <Card color="red" setCount={setCount} alertMessage={alertMessage} user={user} key={index}>{user.name}</Card>
@@ -63,7 +77,7 @@ function App() {
 
       <button ref={myRef} onClick={(e)=>handleClick(e)}>Hello</button>
       <input type="text" onChange={(e)=>handleTextInput(e)} />
-    </>
+    </MyContext.Provider>
   )
 }
 

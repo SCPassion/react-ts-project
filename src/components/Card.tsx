@@ -1,6 +1,8 @@
 // example of a simple card component
 
 import React from "react"
+import {useContext} from 'react';
+import { MyContext } from '../App';
 
 type CardProps = {
     setCount: React.Dispatch<React.SetStateAction<number>> // make sure that the setCount can only be a react state setter function
@@ -26,9 +28,13 @@ const colorMap = {
 // If you need to reuse the type in multiple code scripts, you can create a separate file for it, make a folder in src called "types" and import it here
 
 export default function Card({setCount, color}: CardProps) {
+    const contextData = useContext(MyContext);
+    
     return (
     <div>
         <button onClick={()=>setCount((prev: number)=> prev + 1)} className={colorMap[color]}>Hi</button>
+        {contextData && contextData.user}
+        {contextData && contextData.isLoading}
     </div>
     )
 }
