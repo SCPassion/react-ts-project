@@ -18,6 +18,13 @@ function App() {
   const [user, setUser] = React.useState<User | null>(null) // if it is async data from an api, it is possible to either get the user data or null, so we need to make the type as User or null
   const [loading, setLoading] = React.useState<boolean>(true) // if it is async data from an api, it is possible to either get the user data or null, so we need to make the type as User or null
   
+  // typing the useRef hook
+  const myRef = React.useRef<HTMLButtonElement>(null) 
+
+  // The whole idea for typing hooks is, go to where you are using the hook and hover over it, 
+  // it will show you the type of the hook, then you can use that type to type your hook
+  // for example, if you are using useRef, hover over it and see what type it is, then you can use that type to type your ref
+  
   const users = [
     { name: 'John', age: 25 },
     { name: 'Jane', age: 30 },
@@ -49,7 +56,7 @@ function App() {
       }
       {!loading && user && user.name}
 
-      <button onClick={(e)=>handleClick(e)}>Hello</button>
+      <button ref={myRef} onClick={(e)=>handleClick(e)}>Hello</button>
       <input type="text" onChange={(e)=>handleTextInput(e)} />
     </>
   )
